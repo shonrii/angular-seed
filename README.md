@@ -1,1 +1,2 @@
-# angular-seed first commit
+# angular-seed
+init git flow

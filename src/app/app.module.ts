@@ -1,6 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import {
+  MdSidenavModule,
+  MdToolbarModule
+} from '@angular/material';
+
 
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
@@ -18,6 +24,9 @@ import { PageNotFoundComponent } from './not-found.component';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    FlexLayoutModule,
+    MdSidenavModule,
+    MdToolbarModule,
     CoreModule.forRoot(),
     SharedModule,
     HomeModule,

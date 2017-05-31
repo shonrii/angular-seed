@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import './operators';
+import 'hammerjs';
 
 @Component({
   selector: 'app-root',

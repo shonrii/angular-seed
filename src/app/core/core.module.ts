@@ -8,6 +8,10 @@ import {
 import { CommonModule } from '@angular/common';
 import { HttpModule } from '@angular/http';
 
+import { AuthService } from './auth.service';
+import { AuthGuard } from './auth-guard.service';
+import { CanDeactivateGuard } from './can-deactivate-guard.service';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -26,7 +30,11 @@ export class CoreModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: CoreModule,
-      providers: []
+      providers: [
+        AuthService,
+        AuthGuard,
+        CanDeactivateGuard
+      ]
     };
   }
 }

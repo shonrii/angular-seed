@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+/*import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -12,4 +12,14 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   }
 
-}
+}*/
+
+import { Component } from '@angular/core';
+
+@Component({
+  template:  `
+    <h2>HOME COMPONENT</h2>
+    <router-outlet></router-outlet>
+  `
+})
+export class HomeComponent { }

@@ -13,7 +13,8 @@ import { SharedModule } from './shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { HomeModule } from './home/home.module';
+import { LoginModule } from './login/login.module';
+import { RegistrationModule } from './registration/registration.module';
 import { PageNotFoundComponent } from './not-found.component';
 
 @NgModule({
@@ -29,7 +30,8 @@ import { PageNotFoundComponent } from './not-found.component';
     MdToolbarModule,
     CoreModule.forRoot(),
     SharedModule,
-    HomeModule,
+    LoginModule,
+    RegistrationModule,
     AppRoutingModule
   ],
   providers: [],

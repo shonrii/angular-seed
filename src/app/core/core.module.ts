@@ -6,7 +6,6 @@ import {
   SkipSelf
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpModule } from '@angular/http';
 
 import { AuthService } from './auth.service';
 import { AuthGuard } from './auth-guard.service';
@@ -14,8 +13,7 @@ import { CanDeactivateGuard } from './can-deactivate-guard.service';
 
 @NgModule({
   imports: [
-    CommonModule,
-    HttpModule
+    CommonModule
   ],
   declarations: []
 })

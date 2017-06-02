@@ -11,6 +11,7 @@ import { SideBarComponent } from './side-bar/side-bar.component';
 
 @NgModule({
   imports: [
+    CommonModule,
     HttpModule,
     RouterModule,
     FlexLayoutModule

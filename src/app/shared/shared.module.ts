@@ -3,10 +3,13 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
-import { MdButtonModule, MdIconModule } from '@angular/material';
+import {
+  MdButtonModule,
+  MdIconModule,
+  MdListModule
+} from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ApiService } from './api.service';
-import { SideBarComponent } from './side-bar/side-bar.component';
 
 
 @NgModule({
@@ -16,7 +19,7 @@ import { SideBarComponent } from './side-bar/side-bar.component';
     RouterModule,
     FlexLayoutModule
   ],
-  declarations: [SideBarComponent],
+  declarations: [],
   exports: [
     // angular modules
     CommonModule,
@@ -25,8 +28,8 @@ import { SideBarComponent } from './side-bar/side-bar.component';
     FlexLayoutModule,
     MdButtonModule,
     MdIconModule,
+    MdListModule,
     // shared components/modules
-    SideBarComponent,
   ],
   providers: [
     ApiService

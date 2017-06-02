@@ -12,6 +12,7 @@ import { Component } from '@angular/core';
         <router-outlet></router-outlet>
       </div>
     </div>
-  `
+  `,
+  styleUrls: ['./home.component.scss']
 })
 export class HomeComponent { }

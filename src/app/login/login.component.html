@@ -1,6 +1,13 @@
-<h2>LOGIN</h2>
-<p>{{message}}</p>
-<p>
-  <button (click)="login()" *ngIf="!authService.isLoggedIn">Login</button>
-  <button (click)="logout()" *ngIf="authService.isLoggedIn">Logout</button>
-</p>
+<div fxLayout="column" fxLayoutAlign="center center" class="login-container">
+  <md-card class="login-card">
+    <div fxLayout="column" fxLayoutAlign="center center">
+      <h2>LOGIN</h2>
+      <p>{{message}}</p>
+      <p>
+        <button (click)="login()" *ngIf="!authService.isLoggedIn">Login</button>
+        <button (click)="logout()" *ngIf="authService.isLoggedIn">Logout</button>
+      </p>
+      <button md-raised-button color="primary" [routerLink]="['/register']">Registration</button>
+    </div>
+  </md-card>
+</div>

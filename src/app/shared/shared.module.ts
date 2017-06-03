@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import {
   MdButtonModule,
+  MdCardModule,
   MdIconModule,
   MdListModule
 } from '@angular/material';
@@ -27,6 +28,7 @@ import { ApiService } from './api.service';
     // angular material modules
     FlexLayoutModule,
     MdButtonModule,
+    MdCardModule,
     MdIconModule,
     MdListModule,
     // shared components/modules

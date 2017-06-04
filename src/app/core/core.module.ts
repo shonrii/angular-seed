@@ -6,16 +6,28 @@ import {
   SkipSelf
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import {
+  MdButtonModule,
+  MdIconModule,
+  MdMenuModule,
+  MdToolbarModule
+} from '@angular/material';
 
 import { AuthService } from './auth.service';
 import { AuthGuard } from './auth-guard.service';
 import { CanDeactivateGuard } from './can-deactivate-guard.service';
+import { AppToolbarComponent } from './toolbar.component';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    MdButtonModule,
+    MdIconModule,
+    MdMenuModule,
+    MdToolbarModule
   ],
-  declarations: []
+  declarations: [AppToolbarComponent],
+  exports: [AppToolbarComponent]
 })
 export class CoreModule {
   constructor( @Optional() @SkipSelf() parentModule: CoreModule) {

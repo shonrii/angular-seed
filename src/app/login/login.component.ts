@@ -1,25 +1,57 @@
-import { Component } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  OnInit,
+  OnDestroy
+} from '@angular/core';
 import {
   Router,
   NavigationExtras
 } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
+import { Store } from '@ngrx/store';
+import * as fromRoot from '../reducers';
+import * as auth from '../actions/auth';
 
 import { AuthService } from '../core/auth.service';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit, OnDestroy {
+
+  authSub: any;
+  isLoggedIn = false;
   message: string;
 
-  constructor(public authService: AuthService, public router: Router) {
-    this.setMessage();
+  constructor(
+    public authService: AuthService,
+    public router: Router,
+    private store: Store<fromRoot.State>
+  ) { }
+
+  ngOnInit() {
+    this.authSub = this.authService.isLoggedIn$
+      .subscribe(
+      isLoggedIn => {
+        this.isLoggedIn = isLoggedIn;
+        this.setMessage();
+      },
+      error => {
+        this.isLoggedIn = false;
+        this.setMessage();
+      });
+  }
+
+  ngOnDestroy() {
+    this.authSub.unsubscribe();
   }
 
   setMessage() {
-    this.message = 'Logged ' + (this.authService.isLoggedIn ? 'in' : 'out');
+    this.message = 'Logged ' + (this.isLoggedIn ? 'in' : 'out');
   }
 
   login() {
@@ -27,7 +59,7 @@ export class LoginComponent {
 
     this.authService.login().subscribe(() => {
       this.setMessage();
-      if (this.authService.isLoggedIn) {
+      if (this.isLoggedIn) {
         // Get the redirect URL from our auth service
         // If no redirect has been set, use the default
         const redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/home';

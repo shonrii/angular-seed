@@ -9,46 +9,54 @@ import {
   CanLoad,
   Route
 } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
 import { AuthService } from './auth.service';
 
 @Injectable()
 export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
-  constructor(private authService: AuthService, private router: Router) { }
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) { }
+
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
     const url: string = state.url;
 
     return this.checkLogin(url);
   }
 
-  canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+  canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
     return this.canActivate(route, state);
   }
 
-  canLoad(route: Route): boolean {
+  canLoad(route: Route): Observable<boolean> {
     const url = `/${route.path}`;
 
     return this.checkLogin(url);
   }
 
-  checkLogin(url: string): boolean {
-    if (this.authService.isLoggedIn) { return true; }
+  // TODO: add permissions check
+  checkLogin(url: string): Observable<boolean> {
+    return this.authService.isLoggedIn$
+      .do(isLoggedIn => {
+        if (!isLoggedIn) {
+          // Store the attempted URL for redirecting
+          this.authService.redirectUrl = url;
 
-    // Store the attempted URL for redirecting
-    this.authService.redirectUrl = url;
+          // Create a dummy session id
+          const sessionId = 123456789;
 
-    // Create a dummy session id
-    let sessionId = 123456789;
+          // Set our navigation extras object
+          // that contains our global query params and fragment
+          const navigationExtras: NavigationExtras = {
+            queryParams: { 'session_id': sessionId },
+            fragment: 'anchor'
+          };
 
-    // Set our navigation extras object
-    // that contains our global query params and fragment
-    const navigationExtras: NavigationExtras = {
-      queryParams: { 'session_id': sessionId },
-      fragment: 'anchor'
-    };
-
-    // Navigate to the login page with extras
-    this.router.navigate(['/login'], navigationExtras);
-    return false;
+          // Navigate to the login page with extras
+          this.router.navigate(['/login'], navigationExtras);
+        }
+      }).take(1);
   }
 }

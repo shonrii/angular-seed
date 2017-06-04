@@ -3,18 +3,20 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { HomeComponent } from './home.component';
 import { DashboardHomeComponent } from './dashboard-home.component';
+import { AuthGuard } from '../core/auth-guard.service';
 
 const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: '',
         component: DashboardHomeComponent
       }
     ]
-   }
+  }
 ];
 
 @NgModule({

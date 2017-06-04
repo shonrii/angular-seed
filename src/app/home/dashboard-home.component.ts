@@ -1,6 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  OnInit
+} from '@angular/core';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-home-dashboard',
   template: `
   <h3>home dashboard<h3>

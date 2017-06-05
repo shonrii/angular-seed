@@ -1,6 +1,4 @@
-<app-main-toolbar
-  [visible]="authService.isLoggedIn$ | async"
-  (toggleSideNav)="sidenav.toggle()"></app-main-toolbar>
+<app-main-toolbar [visible]="authService.isAuthenticated() | async" (toggleSideNav)="sidenav.toggle()"></app-main-toolbar>
 <!-- mini-drawer layout to be included in a future angular material release
      https://github.com/angular/material2/issues/1728
      can do some css manipulation with ngIf as a temporary solution if needed -->

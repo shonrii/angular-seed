@@ -13,10 +13,10 @@ import {
   MdToolbarModule
 } from '@angular/material';
 
-import { AuthService } from './auth.service';
-import { AuthGuard } from './auth-guard.service';
-import { CanDeactivateGuard } from './can-deactivate-guard.service';
-import { AppToolbarComponent } from './toolbar.component';
+import { AuthService } from './services/auth.service';
+import { AuthGuard } from './services/auth-guard.service';
+import { CanDeactivateGuard } from './services/can-deactivate-guard.service';
+import { AppToolbarComponent } from './toolbar/toolbar.component';
 
 @NgModule({
   imports: [

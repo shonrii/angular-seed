@@ -80,7 +80,13 @@ export function reducer(state: any, action: any) {
  */
 export const getAuthState = (state: State) => state.auth;
 
-export const isLoggedIn = createSelector(getAuthState, fromAuth.isLoggedIn);
+export const isAuthenticated = createSelector(getAuthState, fromAuth.isAuthenticated);
+export const isAuthenticatedLoaded = createSelector(getAuthState, fromAuth.isAuthenticatedLoaded);
+export const getAuthenticatedUser = createSelector(getAuthState, fromAuth.getAuthenticatedUser);
+export const getAuthenticationError = createSelector(getAuthState, fromAuth.getAuthenticationError);
+export const isAuthenticationLoading = createSelector(getAuthState, fromAuth.isLoading);
+export const getSignOutError = createSelector(getAuthState, fromAuth.getSignOutError);
+export const getRegistrationError = createSelector(getAuthState, fromAuth.getRegistrationError);
 
 /**
  * Layout Reducers

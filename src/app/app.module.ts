@@ -11,6 +11,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { RouterStoreModule } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { AuthEffects } from './effects/auth';
 import { reducer } from './reducers';
 
 import { CoreModule } from './core/core.module';
@@ -33,6 +34,7 @@ import { PageNotFoundComponent } from './not-found.component';
     MdMenuModule,
     MdToolbarModule,
     MdSidenavModule,
+    EffectsModule.run(AuthEffects),
     /**
      * StoreModule.provideStore is imported once in the root module, accepting a reducer
      * function or object map of reducer functions. If passed an object of

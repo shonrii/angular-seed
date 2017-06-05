@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Router, RouterStub } from '../../testing/router-stubs';
-import { AuthService } from '../core/auth.service';
+import { AuthService } from '../core/services/auth.service';
 import { LoginModule } from './login.module';
 import { LoginComponent } from './login.component';
 

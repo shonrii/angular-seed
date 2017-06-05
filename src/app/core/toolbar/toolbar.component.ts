@@ -4,8 +4,9 @@ import {
   Output,
   EventEmitter
 } from '@angular/core';
-
-import { AuthService } from './auth.service';
+import { Store } from '@ngrx/store';
+import * as fromRoot from '../../reducers';
+import * as auth from '../../actions/auth';
 
 @Component({
   selector: 'app-main-toolbar',
@@ -16,5 +17,9 @@ import { AuthService } from './auth.service';
 export class AppToolbarComponent {
   @Input() visible = true;
   @Output() toggleSideNav = new EventEmitter();
-  constructor(public authService: AuthService) { }
+  constructor(private store: Store<fromRoot.State>) { }
+
+  signOut() {
+    this.store.dispatch(new auth.SignOutAction());
+  }
 }

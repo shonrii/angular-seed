@@ -1,3 +1,4 @@
+/* tslint:disable */
 // export for convenience.
 export { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/router';
 
@@ -11,7 +12,7 @@ import { NavigationExtras } from '@angular/router';
   }
 })
 export class RouterLinkStubDirective {
-  @Input('routerLink') linkParams: any;
+  @Input('routerLink') linkParams: string;
   navigatedTo: any = null;
 
   onClick() {
@@ -51,3 +52,9 @@ export class ActivatedRouteStub {
     return { params: this.testParams };
   }
 }
+
+@NgModule({
+  declarations: [],
+  imports: []
+})
+export class AppModule { }

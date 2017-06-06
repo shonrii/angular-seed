@@ -14,6 +14,9 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AuthEffects } from './effects/auth';
 import { reducer } from './reducers';
 
+import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { InMemoryDataService } from './in-memory-data.service';
+
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
@@ -43,13 +46,11 @@ import { PageNotFoundComponent } from './not-found.component';
      * based application.
      */
     StoreModule.provideStore(reducer),
-
     /**
      * @ngrx/router-store keeps router state up-to-date in the store and uses
      * the store as the single source of truth for the router's state.
      */
     RouterStoreModule.connectRouter(),
-
     /**
      * Store devtools instrument the store retaining past versions of state
      * and recalculating new states. This enables powerful time-travel
@@ -61,10 +62,11 @@ import { PageNotFoundComponent } from './not-found.component';
      * See: https://github.com/zalmoxisus/redux-devtools-extension
      */
     StoreDevtoolsModule.instrumentOnlyWithExtension(),
-    CoreModule.forRoot(),
     SharedModule,
+    CoreModule.forRoot(),
     LoginModule,
     RegistrationModule,
+    InMemoryWebApiModule.forRoot(InMemoryDataService),
     AppRoutingModule
   ],
   providers: [],

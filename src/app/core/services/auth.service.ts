@@ -5,6 +5,8 @@ import { Store } from '@ngrx/store';
 import { go } from '@ngrx/router-store';
 import * as fromRoot from '../../reducers';
 import * as auth from '../../actions/auth';
+
+import { UserService } from '../../shared/user.service';
 import { User } from '../models';
 
 export const MOCK_USER = new User();
@@ -20,7 +22,10 @@ export class AuthService {
   redirectUrl: string;
   private _isAuthenticated = false;
 
-  constructor(private store: Store<fromRoot.State>) {
+  constructor(
+    private store: Store<fromRoot.State>,
+    private userApi: UserService
+  ) {
     const cookie = localStorage.getItem('seed-app-logged-in') || null;
     if (cookie) {
       this.store.dispatch(new auth.AuthenticatedAction({ token: cookie }));
@@ -29,13 +34,37 @@ export class AuthService {
 
   public authenticate(email: string, password: string): Observable<User> {
     // TODO: http request to authenticate
-    if (email === MOCK_USER.email && password === MOCK_USER.password) {
-      localStorage.setItem('seed-app-logged-in', 'alksdjfl;asjdflkj');
-      this._isAuthenticated = true;
-      return Observable.of(MOCK_USER);
-    }
+    return this.userApi.getUsers()
+      .map(users => {
+        for (const user of users) {
+          if (user.email === email) {
+            if (user.password !== password) {
+              return Observable.throw(new Error('Invalid password'));
+            }
+            localStorage.setItem('seed-app-logged-in', 'alksdjfl;asjdflkj');
+            this._isAuthenticated = true;
+            return Observable.of(user);
+          }
+        }
 
-    return Observable.throw(new Error('Invalid email or password'));
+        return Observable.throw(new Error('Invalid email'));
+      });
+
+    /*return this.userApi.findUser(email)
+      .map(user => {
+        console.log('user', user);
+        if (Object.keys(user).length === 0 && user.constructor === Object) {
+          return Observable.throw(new Error('Invalid email'));
+        }
+
+        if (user.password === password) {
+          localStorage.setItem('seed-app-logged-in', 'alksdjfl;asjdflkj');
+          this._isAuthenticated = true;
+          return Observable.of(user);
+        } else {
+          return Observable.throw(new Error('Invalid password'));
+        }
+      });*/
   }
 
   public isAuthenticated(): Observable<boolean> {

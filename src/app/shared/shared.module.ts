@@ -12,7 +12,7 @@ import {
   MdProgressSpinnerModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { ApiService } from './api.service';
+import { UserService } from './user.service';
 
 
 @NgModule({
@@ -39,7 +39,7 @@ import { ApiService } from './api.service';
     // shared components/modules
   ],
   providers: [
-    ApiService
+    UserService
   ]
 })
 export class SharedModule { }

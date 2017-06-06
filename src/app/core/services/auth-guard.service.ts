@@ -42,9 +42,9 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
   // TODO: add permissions check
   checkLogin(url: string): Observable<boolean> {
     return this.authService.isAuthenticated()
-      .do(isLoggedIn => {
-        console.log('guard.checkLogin isLoggedIn:', isLoggedIn);
-        if (!isLoggedIn) {
+      .do(authenticated => {
+        console.log('guard.checkLogin:', authenticated);
+        if (!authenticated) {
           // Store the attempted URL for redirecting
           this.authService.redirectUrl = url;
 

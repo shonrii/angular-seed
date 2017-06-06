@@ -8,8 +8,11 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-home-dashboard',
   template: `
-  <h3>home dashboard<h3>
-  `
+  <div class="dashboard-container">
+    <p>home dashboard</p>
+  </div>
+  `,
+  styleUrls: ['./dashboard-home.component.scss']
 })
 
 export class DashboardHomeComponent implements OnInit {

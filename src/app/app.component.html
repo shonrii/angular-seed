@@ -2,7 +2,7 @@
 <!-- mini-drawer layout to be included in a future angular material release
      https://github.com/angular/material2/issues/1728
      can do some css manipulation with ngIf as a temporary solution if needed -->
-<md-sidenav-container class="app-main-container">
+<md-sidenav-container>
   <md-sidenav #sidenav mode="side" [opened]="showSidenav$ | async">
     <md-nav-list>
       <md-list-item *ngFor="let view of views">
@@ -13,8 +13,5 @@
       </md-list-item>
     </md-nav-list>
   </md-sidenav>
-  <!--<div [ngClass]="{'app-login': !isLoggedIn$, 'app-main-content': isLoggedIn$}">-->
-  <div class="app-main-content">
-    <router-outlet></router-outlet>
-  </div>
+  <router-outlet></router-outlet>
 </md-sidenav-container>

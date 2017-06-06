@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterOutletStubComponent } from '../../testing/router-stubs';
 import { HomeModule } from './home.module';
-import { DashboardHomeComponent } from './dashboard-home.component';
+import { DashboardHomeComponent } from './dashboard/dashboard-home.component';
 import { HomeComponent } from './home.component';
 
 describe('HomeComponent', () => {

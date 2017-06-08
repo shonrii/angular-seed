@@ -61,17 +61,17 @@ export class SignOutSuccessAction implements Action {
   constructor(public payload?: any) {}
 }
 
-export class SignUpAction implements Action {
+export class RegisterAction implements Action {
   readonly type: string = ActionTypes.REGISTER;
   constructor(public payload: { user: User }) {}
 }
 
-export class SignUpErrorAction implements Action {
+export class RegistrationErrorAction implements Action {
   readonly type: string = ActionTypes.REGISTRATION_ERROR;
   constructor(public payload?: any) {}
 }
 
-export class SignUpSuccessAction implements Action {
+export class RegistrationSuccessAction implements Action {
   readonly type: string = ActionTypes.REGISTRATION_SUCCESS;
   constructor(public payload: { user: User }) {}
 }
@@ -84,6 +84,6 @@ export type Actions
   | AuthenticatedSuccessAction
   | AuthenticationErrorAction
   | AuthenticationSuccessAction
-  | SignUpAction
-  | SignUpErrorAction
-  | SignUpSuccessAction;
+  | RegisterAction
+  | RegistrationErrorAction
+  | RegistrationSuccessAction;

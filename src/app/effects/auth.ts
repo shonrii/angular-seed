@@ -56,8 +56,8 @@ export class AuthEffects {
     .map(toPayload)
     .switchMap(payload => {
       return this.authService.create(payload.user)
-        .map(user => new auth.SignUpSuccessAction({ user: user }))
-        .catch(error => Observable.of(new auth.SignUpErrorAction({ error: error })));
+        .map(user => new auth.RegistrationSuccessAction({ user: user }))
+        .catch(error => Observable.of(new auth.RegistrationErrorAction({ error: error })));
     });
 
   @Effect()

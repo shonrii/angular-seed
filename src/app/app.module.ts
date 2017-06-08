@@ -14,9 +14,6 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AuthEffects } from './effects/auth';
 import { reducer } from './reducers';
 
-import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService } from './in-memory-data.service';
-
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
@@ -66,7 +63,6 @@ import { PageNotFoundComponent } from './not-found.component';
     CoreModule.forRoot(),
     LoginModule,
     RegistrationModule,
-    InMemoryWebApiModule.forRoot(InMemoryDataService),
     AppRoutingModule
   ],
   providers: [],

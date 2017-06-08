@@ -3,6 +3,8 @@ import {
   ChangeDetectionStrategy,
   OnInit
 } from '@angular/core';
+import { UserService } from '../../shared/user.service';
+import { User } from '../../core/models';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -16,7 +18,10 @@ import {
 })
 
 export class DashboardHomeComponent implements OnInit {
-  constructor() { }
+  constructor(private userService: UserService) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.userService.getUsers()
+      .subscribe(users => console.log('users', users));
+  }
 }

@@ -20,6 +20,8 @@ import * as fromRoot from '../reducers';
 import * as auth from '../actions/auth';
 
 import { AuthService } from '../core/services/auth.service';
+import { UserService } from '../shared/user.service';
+import { User } from '../core/models';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -39,7 +41,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     public authService: AuthService,
     public router: Router,
     private fb: FormBuilder,
-    private store: Store<fromRoot.State>
+    private store: Store<fromRoot.State>,
+    private userService: UserService
   ) { }
 
   ngOnInit() {
@@ -50,6 +53,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     this.error$ = this.store.select(fromRoot.getAuthenticationError);
     this.loading$ = this.store.select(fromRoot.isAuthenticationLoading);
+    this.userService.getUsers()
+      .subscribe(users => console.log('users', users));
 
     this.store.select(fromRoot.isAuthenticated)
       .takeWhile(() => this.isAlive)

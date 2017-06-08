@@ -12,7 +12,7 @@ export class InMemoryDataService implements InMemoryDbService {
      */
     const users: User[] = [
       {
-        id: '1',
+        id: 1,
         email: 'foo@test.com',
         firstName: 'Foo',
         lastName: 'Bar',

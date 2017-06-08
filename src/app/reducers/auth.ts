@@ -31,7 +31,6 @@ export function reducer(state = initialState, action: auth.Actions): State {
       });
 
     case auth.ActionTypes.AUTHENTICATED_SUCCESS:
-      console.log('action', action);
       return Object.assign({}, state, {
         authenticated: action.payload.authenticated,
         loaded: true,

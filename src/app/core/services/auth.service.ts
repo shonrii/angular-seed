@@ -20,7 +20,6 @@ MOCK_USER.password = 'password';*/
 export class AuthService {
 
   redirectUrl: string;
-  private _isAuthenticated = false;
 
   constructor(
     private store: Store<fromRoot.State>,
@@ -42,7 +41,6 @@ export class AuthService {
               return Observable.throw(new Error('Invalid password'));
             }
             localStorage.setItem('seed-app-logged-in', 'alksdjfl;asjdflkj');
-            this._isAuthenticated = true;
             return Observable.of(user);
           }
         }
@@ -52,12 +50,11 @@ export class AuthService {
   }
 
   public isAuthenticated(): Observable<boolean> {
-    return Observable.of(this._isAuthenticated);
+    return this.store.select(fromRoot.isAuthenticated);
   }
 
   public isAuthenticatedUser(): Observable<User> {
     // TODO: http request to verify session
-    this._isAuthenticated = true;
     // return Observable.of(MOCK_USER);
     return this.store.select(fromRoot.getAuthenticatedUser);
   }
@@ -66,7 +63,6 @@ export class AuthService {
     // TODO: http request to end session
     localStorage.removeItem('seed-app-logged-in');
     this.store.dispatch(go('/login'));
-    this._isAuthenticated = false;
     return Observable.of(true);
   }
 

@@ -16,7 +16,7 @@ export class UserService {
 
   constructor(private http: Http) { }
 
-  findUser(id: string): Observable<User> {
+  findUser(id: number): Observable<User> {
     return this.http.get(`${this.usersUrl}/${id}`)
       .map(this.extractData)
       .catch(this.handleError);
@@ -42,7 +42,7 @@ export class UserService {
       .catch(this.handleError);
   }
 
-  delete(id: string) {
+  delete(id: number) {
     return this.http.delete(`${this.usersUrl}/${id}`)
       .map(res => Observable.of({}))
       .catch(this.handleError);

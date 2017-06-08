@@ -41,8 +41,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     public authService: AuthService,
     public router: Router,
     private fb: FormBuilder,
-    private store: Store<fromRoot.State>,
-    private userService: UserService
+    private store: Store<fromRoot.State>
   ) { }
 
   ngOnInit() {
@@ -53,8 +52,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     this.error$ = this.store.select(fromRoot.getAuthenticationError);
     this.loading$ = this.store.select(fromRoot.isAuthenticationLoading);
-    this.userService.getUsers()
-      .subscribe(users => console.log('users', users));
 
     this.store.select(fromRoot.isAuthenticated)
       .takeWhile(() => this.isAlive)

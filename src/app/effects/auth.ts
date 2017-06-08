@@ -3,6 +3,7 @@ import { Effect, Actions, toPayload } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { AuthService } from '../core/services/auth.service';
+import { UserService } from '../shared/user.service';
 import { User } from '../core/models';
 
 import * as auth from '../actions/auth';
@@ -55,7 +56,7 @@ export class AuthEffects {
     .debounceTime(500)
     .map(toPayload)
     .switchMap(payload => {
-      return this.authService.create(payload.user)
+      return this.userService.create(payload.user)
         .map(user => new auth.RegistrationSuccessAction({ user: user }))
         .catch(error => Observable.of(new auth.RegistrationErrorAction({ error: error })));
     });
@@ -73,6 +74,7 @@ export class AuthEffects {
 
   constructor(
     private actions: Actions,
-    private authService: AuthService
+    private authService: AuthService,
+    private userService: UserService
   ) { }
 }

@@ -16,9 +16,8 @@ export class UserService {
 
   constructor(private http: Http) { }
 
-  // can't get this to work
-  findUser(email: string): Observable<User> {
-    return this.http.get(`api/users/${email}`)
+  findUser(id: string): Observable<User> {
+    return this.http.get(`${this.usersUrl}/${id}`)
       .map(this.extractData)
       .catch(this.handleError);
   }
@@ -29,10 +28,23 @@ export class UserService {
       .catch(this.handleError);
   }
 
-  create(name: string): Observable<User> {
+  create(user: User): Observable<User> {
     const options = ApiUtils.generateOptions('POST');
-    return this.http.post(this.usersUrl, { name }, options)
+    return this.http.post(this.usersUrl, JSON.stringify(user), options)
       .map(this.extractData)
+      .catch(this.handleError);
+  }
+
+  update(user: User): Observable<User> {
+    const options = ApiUtils.generateOptions('PUT');
+    return this.http.put(`${this.usersUrl}/${user.id}`, JSON.stringify(user), options)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
+  delete(id: string) {
+    return this.http.delete(`${this.usersUrl}/${id}`)
+      .map(res => Observable.of({}))
       .catch(this.handleError);
   }
 

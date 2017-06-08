@@ -49,22 +49,6 @@ export class AuthService {
 
         return Observable.throw(new Error('Invalid email'));
       });
-
-    /*return this.userApi.findUser(email)
-      .map(user => {
-        console.log('user', user);
-        if (Object.keys(user).length === 0 && user.constructor === Object) {
-          return Observable.throw(new Error('Invalid email'));
-        }
-
-        if (user.password === password) {
-          localStorage.setItem('seed-app-logged-in', 'alksdjfl;asjdflkj');
-          this._isAuthenticated = true;
-          return Observable.of(user);
-        } else {
-          return Observable.throw(new Error('Invalid password'));
-        }
-      });*/
   }
 
   public isAuthenticated(): Observable<boolean> {
@@ -76,12 +60,6 @@ export class AuthService {
     this._isAuthenticated = true;
     // return Observable.of(MOCK_USER);
     return this.store.select(fromRoot.getAuthenticatedUser);
-  }
-
-  public create(user: User): Observable<User> {
-    // TODO: http request to create user
-    this._isAuthenticated = true;
-    return Observable.of(user);
   }
 
   public signOut(): Observable<boolean> {

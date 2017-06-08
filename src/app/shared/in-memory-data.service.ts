@@ -1,5 +1,5 @@
 import { InMemoryDbService } from 'angular-in-memory-web-api';
-import { User } from './core/models';
+import { User } from '../core/models';
 
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {

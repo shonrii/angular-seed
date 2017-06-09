@@ -9,10 +9,6 @@ import {
   FormGroup,
   Validators
 } from '@angular/forms';
-import {
-  Router,
-  NavigationExtras
-} from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 import { go } from '@ngrx/router-store';
@@ -80,6 +76,10 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     };
 
     this.store.dispatch(new auth.RegisterAction(payload));
+  }
+
+  goBack() {
+    this.store.dispatch(go('/login'));
   }
 
 }

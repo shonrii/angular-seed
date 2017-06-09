@@ -24,6 +24,7 @@
                   spellcheck="off" formControlName="password">
               </md-input-container>
               <button md-raised-button [disabled]="signupForm.invalid" type="submit" color="accent">Sign Up</button>
+              <button md-button type="button" (click)="goBack()">Go Back</button>
             </div>
           </form>
           <div fxLayout="row" fxLayoutAlign="center">

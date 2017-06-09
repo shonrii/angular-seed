@@ -3,8 +3,8 @@ import {
   ChangeDetectionStrategy,
   OnInit
 } from '@angular/core';
-import { UserService } from '../../shared/user.service';
-import { User } from '../../core/models';
+import { UserService } from '../../http-core/services/user.service';
+import { User } from '../../app-core/models';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

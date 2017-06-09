@@ -6,8 +6,8 @@ import { go } from '@ngrx/router-store';
 import * as fromRoot from '../../reducers';
 import * as auth from '../../actions/auth';
 
-import { UserService } from '../../shared/user.service';
-import { User } from '../models';
+import { UserService } from '../../http-core/services/user.service';
+import { User } from '../../app-core/models';
 
 /*export const MOCK_USER = new User();
 MOCK_USER.id = '1';

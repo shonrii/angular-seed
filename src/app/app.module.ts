@@ -14,7 +14,9 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AuthEffects } from './effects/auth';
 import { reducer } from './reducers';
 
-import { CoreModule } from './core/core.module';
+import { AppCoreModule } from './app-core/app-core.module';
+import { AuthCoreModule } from './auth-core/auth-core.module';
+import { HttpCoreModule } from './http-core/http-core.module';
 import { SharedModule } from './shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -60,7 +62,9 @@ import { PageNotFoundComponent } from './not-found.component';
      */
     StoreDevtoolsModule.instrumentOnlyWithExtension(),
     SharedModule,
-    CoreModule.forRoot(),
+    AppCoreModule,
+    AuthCoreModule,
+    HttpCoreModule,
     LoginModule,
     RegistrationModule,
     AppRoutingModule

@@ -2,7 +2,7 @@ import { TestBed, async } from '@angular/core/testing';
 import { RouterModule } from '@angular/router';
 import { MdSidenavModule, MdToolbarModule } from '@angular/material';
 import { AppComponent } from './app.component';
-import { AuthService } from './core/services/auth.service';
+import { AuthService } from './auth-core/services/auth.service';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {

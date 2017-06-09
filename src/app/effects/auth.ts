@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { Effect, Actions, toPayload } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import { AuthService } from '../core/services/auth.service';
-import { UserService } from '../shared/user.service';
-import { User } from '../core/models';
+import { AuthService } from '../auth-core/services/auth.service';
+import { UserService } from '../http-core/services/user.service';
+import { User } from '../app-core/models';
 
 import * as auth from '../actions/auth';
 

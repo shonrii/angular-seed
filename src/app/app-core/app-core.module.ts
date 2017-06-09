@@ -13,9 +13,6 @@ import {
   MdToolbarModule
 } from '@angular/material';
 
-import { AuthService } from './services/auth.service';
-import { AuthGuard } from './services/auth-guard.service';
-import { CanDeactivateGuard } from './services/can-deactivate-guard.service';
 import { AppToolbarComponent } from './toolbar/toolbar.component';
 
 @NgModule({
@@ -29,22 +26,11 @@ import { AppToolbarComponent } from './toolbar/toolbar.component';
   declarations: [AppToolbarComponent],
   exports: [AppToolbarComponent]
 })
-export class CoreModule {
-  constructor( @Optional() @SkipSelf() parentModule: CoreModule) {
+export class AppCoreModule {
+  constructor( @Optional() @SkipSelf() parentModule: AppCoreModule) {
     if (parentModule) {
       throw new Error(
-        'CoreModule is already loaded. Import it in the AppModule only.');
+        'AppCoreModule is already loaded. Import it in the AppModule only.');
     }
-  }
-
-  static forRoot(): ModuleWithProviders {
-    return {
-      ngModule: CoreModule,
-      providers: [
-        AuthService,
-        AuthGuard,
-        CanDeactivateGuard
-      ]
-    };
   }
 }

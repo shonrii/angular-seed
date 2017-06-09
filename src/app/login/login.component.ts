@@ -19,7 +19,7 @@ import { go } from '@ngrx/router-store';
 import * as fromRoot from '../reducers';
 import * as auth from '../actions/auth';
 
-import { AuthService } from '../core/services/auth.service';
+import { AuthService } from '../auth-core/services/auth.service';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

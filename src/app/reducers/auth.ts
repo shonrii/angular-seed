@@ -1,5 +1,5 @@
 import * as auth from '../actions/auth';
-import { User } from '../core/models';
+import { User } from '../app-core/models';
 
 export interface State {
   authenticated: boolean;

@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { User } from '../core/models';
+import { User } from '../app-core/models';
 
 export const ActionTypes = {
   AUTHENTICATE: '[Auth] Authenticate',

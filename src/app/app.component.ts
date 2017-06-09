@@ -8,7 +8,7 @@ import { Store } from '@ngrx/store';
 import * as fromRoot from './reducers';
 import * as layout from './actions/layout';
 
-import { AuthService } from './core/services/auth.service';
+import { AuthService } from './auth-core/services/auth.service';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

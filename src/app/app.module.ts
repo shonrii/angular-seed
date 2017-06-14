@@ -7,6 +7,8 @@ import {
   MdToolbarModule
 } from '@angular/material';
 
+import 'hammerjs';
+
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { RouterStoreModule } from '@ngrx/router-store';

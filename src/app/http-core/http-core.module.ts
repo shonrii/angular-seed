@@ -15,10 +15,10 @@ import { InMemoryDataService } from './services/in-memory-data.service';
 @NgModule({
   imports: [
     HttpModule,
-    InMemoryWebApiModule.forRoot(InMemoryDataService),
+    InMemoryWebApiModule.forRoot(InMemoryDataService, { passThruUnknownUrl : true })
   ],
   declarations: [],
-  exports: [],
+  exports: [HttpModule],
   providers: [UserService]
 })
 export class HttpCoreModule {

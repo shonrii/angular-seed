@@ -1,6 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { MdIconRegistry } from '@angular/material';
+import { DomSanitizer } from '@angular/platform-browser';
 import './operators';
-import 'hammerjs';
 
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
@@ -37,9 +38,13 @@ export class AppComponent {
 
   constructor(
     public authService: AuthService,
+    iconRegistry: MdIconRegistry,
+    sanitizer: DomSanitizer,
     private store: Store<fromRoot.State>
   ) {
     this.showSidenav$ = this.store.select(fromRoot.getShowSidenav);
+    const avatarsSafeUrl = sanitizer.bypassSecurityTrustResourceUrl('./assets/avatars.svg');
+    iconRegistry.addSvgIconSetInNamespace('avatars', avatarsSafeUrl);
   }
 
   closeSidenav() {

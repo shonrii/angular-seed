@@ -1,17 +1,21 @@
-<app-main-toolbar [visible]="authService.isAuthenticated() | async" (toggleSideNav)="sidenav.toggle()"></app-main-toolbar>
-<!-- mini-drawer layout to be included in a future angular material release
+<div fxLayout="column" fxFlex>
+  <app-main-toolbar [visible]="authService.isAuthenticated() | async" (toggleSideNav)="sidenav.toggle()"></app-main-toolbar>
+  <!-- mini-drawer layout to be included in a future angular material release
      https://github.com/angular/material2/issues/1728
      can do some css manipulation with ngIf as a temporary solution if needed -->
-<md-sidenav-container>
-  <md-sidenav #sidenav mode="side" [opened]="showSidenav$ | async">
-    <md-nav-list>
-      <md-list-item *ngFor="let view of views">
-        <!--<a md-line>{{ view.name }}</a>-->
-        <button md-icon-button>
+  <md-sidenav-container fxFlex>
+    <md-sidenav #sidenav mode="side" [opened]="showSidenav$ | async">
+      <md-nav-list>
+        <md-list-item *ngFor="let view of views">
+          <!--<a md-line>{{ view.name }}</a>-->
+          <button md-icon-button>
           <md-icon>{{view.icon}}</md-icon>
         </button>
-      </md-list-item>
-    </md-nav-list>
-  </md-sidenav>
-  <router-outlet></router-outlet>
-</md-sidenav-container>
+        </md-list-item>
+      </md-nav-list>
+    </md-sidenav>
+    <div fxLayout="column">
+      <router-outlet></router-outlet>
+    </div>
+  </md-sidenav-container>
+</div>

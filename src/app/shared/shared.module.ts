@@ -8,7 +8,8 @@ import {
   MdIconModule,
   MdInputModule,
   MdListModule,
-  MdProgressSpinnerModule
+  MdProgressSpinnerModule,
+  MdSelectModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -31,7 +32,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MdIconModule,
     MdInputModule,
     MdListModule,
-    MdProgressSpinnerModule
+    MdProgressSpinnerModule,
+    MdSelectModule,
     // shared components/modules
   ]
 })

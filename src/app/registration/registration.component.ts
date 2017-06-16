@@ -17,6 +17,7 @@ import * as auth from '../actions/auth';
 
 import { AuthService } from '../auth-core/services/auth.service';
 import { User } from '../app-core/models';
+import { AppUtils } from '../utils/app.utils';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -33,12 +34,12 @@ export class RegistrationComponent implements OnInit, OnDestroy {
   private isAlive = true;
 
   constructor(
-    private formBuilder: FormBuilder,
+    private fb: FormBuilder,
     private store: Store<fromRoot.State>
   ) { }
 
   ngOnInit() {
-    this.signupForm = this.formBuilder.group({
+    this.signupForm = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       email: ['', Validators.required],
@@ -59,17 +60,9 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     this.isAlive = false;
   }
 
-  submit() {
-    const user: User = new User();
-    user.email = this.signupForm.get('email').value;
-    user.firstName = this.signupForm.get('firstName').value;
-    user.lastName = this.signupForm.get('lastName').value;
-    user.password = this.signupForm.get('password').value;
-
-    user.email.trim();
-    user.firstName.trim();
-    user.lastName.trim();
-    user.password.trim();
+  submit(form: User) {
+    AppUtils.trimFields(form);
+    const user: User = new User(form);
 
     const payload = {
       user: user

@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import {
   MdButtonModule,
   MdCardModule,
+  MdCheckboxModule,
   MdIconModule,
   MdInputModule,
   MdListModule,
@@ -29,6 +30,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     FlexLayoutModule,
     MdButtonModule,
     MdCardModule,
+    MdCheckboxModule,
     MdIconModule,
     MdInputModule,
     MdListModule,

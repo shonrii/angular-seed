@@ -37,6 +37,13 @@ export function reducer(state = initialState, action: auth.Actions): State {
         user: action.payload.user
       });
 
+    case auth.ActionTypes.REGISTER:
+      return Object.assign({}, state, {
+        authenticated: state.authenticated || false,
+        error: undefined,
+        loading: true
+      });
+
     case auth.ActionTypes.AUTHENTICATION_ERROR:
     case auth.ActionTypes.REGISTRATION_ERROR:
       return Object.assign({}, state, {
@@ -73,13 +80,6 @@ export function reducer(state = initialState, action: auth.Actions): State {
         authenticated: false,
         error: undefined,
         user: undefined
-      });
-
-    case auth.ActionTypes.REGISTER:
-      return Object.assign({}, state, {
-        authenticated: false,
-        error: undefined,
-        loading: true
       });
 
     default:

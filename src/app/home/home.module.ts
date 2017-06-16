@@ -21,6 +21,7 @@ import { HomeRoutingModule } from './home-routing.module';
     HomeComponent,
     DashboardHomeComponent,
     DialogComponent
-  ]
+  ],
+  entryComponents: [DialogComponent]
 })
 export class HomeModule { }

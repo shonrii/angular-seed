@@ -8,7 +8,6 @@ import {
 import { MdDialog } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
-import { go } from '@ngrx/router-store';
 import * as fromRoot from '../../reducers';
 import * as auth from '../../actions/auth';
 
@@ -39,13 +38,6 @@ export class DashboardHomeComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.loadUsers();
-
-    this.store.select(fromRoot.isAuthenticated)
-      .takeWhile(() => this.isAlive)
-      .filter(authenticated => authenticated)
-      .subscribe(value => {
-        this.store.dispatch(go('/home'));
-      });
   }
 
   ngOnDestroy() {

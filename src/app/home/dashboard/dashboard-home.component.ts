@@ -8,6 +8,7 @@ import {
 import { MdDialog } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
+import { go } from '@ngrx/router-store';
 import * as fromRoot from '../../reducers';
 import * as auth from '../../actions/auth';
 
@@ -15,6 +16,7 @@ import { DialogComponent } from '../dialog/dialog.component';
 import { UserService } from '../../http-core/services/user.service';
 import { User } from '../../app-core/models';
 import { AppUtils } from '../../utils/app.utils';
+import { ArrayUtils } from '../../utils/array.utils';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -26,8 +28,8 @@ import { AppUtils } from '../../utils/app.utils';
 export class DashboardHomeComponent implements OnInit, OnDestroy {
 
   users: User[];
-  selectedUser: User;
   isAlive = true;
+  private selectedUser: User;
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -62,13 +64,22 @@ export class DashboardHomeComponent implements OnInit, OnDestroy {
       });
   }
 
+  openDeleteDialog() {
+    console.log('openDeleteDialog()');
+  }
+
+  selectUser(user: User) {
+    this.selectedUser = user;
+    this.store.dispatch(go(['/home', this.selectedUser.id]));
+  }
+
   loadUsers() {
     this.userService.getUsers()
       .subscribe(users => {
         console.log('users', users);
         this.users = users;
-        if (users && users.length > 0) {
-          this.selectedUser = this.users[0];
+        if (!ArrayUtils.isEmpty(users) && !this.selectedUser) {
+          this.store.dispatch(go(['/home', this.users[0].id]));
         }
         this.cdr.detectChanges();
       });

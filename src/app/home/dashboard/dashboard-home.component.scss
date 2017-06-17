@@ -1,3 +1,11 @@
+@import "~@angular/material/theming";
+@include mat-core();
+.content {
+  background-color: mat-color($mat-grey, 100);
+  min-height: 100%;
+  padding: 12px;
+}
+
 /deep/ md-icon.avatar {
   overflow: hidden;
   width: 64px;
@@ -14,4 +22,8 @@
   position: fixed;
   right: 16px;
   bottom: 16px;
+}
+
+.filler {
+  flex: 1 1 auto;
 }

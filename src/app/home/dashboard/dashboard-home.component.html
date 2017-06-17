@@ -1,17 +1,29 @@
-<md-tab-group>
-  <md-tab label="Users">
-    <md-nav-list>
-      <md-list-item *ngFor="let user of users" (click)="selectedUser = user">
-        <md-icon svgIcon="avatars:{{user.avatar}}" class="avatar"></md-icon>
-        <span>{{user.firstName}} {{user.lastName}}</span>
-      </md-list-item>
-    </md-nav-list>
-  </md-tab>
-  <md-tab label="Settings">
-    <span>Settings...</span>
-  </md-tab>
-</md-tab-group>
+<div class="content" fxLayout="row" fxLayoutGap="10px">
+  <md-card fxFlex="30">
+    <md-tab-group>
+      <md-tab label="Users">
+        <md-nav-list>
+          <md-list-item *ngFor="let user of users" (click)="selectUser(user)">
+            <md-icon svgIcon="avatars:{{user.avatar}}" class="avatar"></md-icon>
+            <span>{{user.firstName}} {{user.lastName}}</span>
+            <span class="filler"></span>
+            <button md-icon-button (click)="openDeleteDialog()">
+              <md-icon>close</md-icon>
+            </button>
+          </md-list-item>
+        </md-nav-list>
+      </md-tab>
+      <md-tab label="Settings">
+        <span>Settings...</span>
+      </md-tab>
+    </md-tab-group>
+  </md-card>
 
-<button md-fab (click)="openAdminDialog()" class="fab-bottom-right">
-  <md-icon>add</md-icon>
-</button>
+  <md-card fxFlex fxLayout="column" fxLayoutGap="14px">
+    <router-outlet></router-outlet>
+  </md-card>
+
+  <button md-fab (click)="openAdminDialog()" color="primary" class="fab-bottom-right">
+    <md-icon>add</md-icon>
+  </button>
+</div>

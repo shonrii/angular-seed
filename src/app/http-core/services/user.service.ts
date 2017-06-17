@@ -6,7 +6,7 @@ import {
   Response
 } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { ApiUtils } from '../api-utils';
+import { ApiUtils } from '../../utils/api.utils';
 import { User } from '../../app-core/models';
 
 @Injectable()

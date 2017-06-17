@@ -9,6 +9,7 @@ import { HomeComponent } from './home.component';
 import { DashboardHomeComponent } from './dashboard/dashboard-home.component';
 import { DialogComponent } from './dialog/dialog.component';
 import { HomeRoutingModule } from './home-routing.module';
+import { UserDetailsComponent } from './user-details/user-details.component';
 
 @NgModule({
   imports: [
@@ -20,7 +21,8 @@ import { HomeRoutingModule } from './home-routing.module';
   declarations: [
     HomeComponent,
     DashboardHomeComponent,
-    DialogComponent
+    DialogComponent,
+    UserDetailsComponent
   ],
   entryComponents: [DialogComponent]
 })

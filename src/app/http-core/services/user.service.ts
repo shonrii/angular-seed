@@ -43,6 +43,10 @@ export class UserService {
   }
 
   delete(id: number) {
+    /**
+     * note: you can delete the current user
+     * backend should implement a guard
+     */
     return this.http.delete(`${this.usersUrl}/${id}`)
       .map(res => Observable.of({}))
       .catch(this.handleError);

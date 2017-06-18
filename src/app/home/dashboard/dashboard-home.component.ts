@@ -78,10 +78,15 @@ export class DashboardHomeComponent implements OnInit, OnDestroy {
       })
       .afterClosed()
       .filter(result => !!result)
-      .subscribe(result => {
-        console.log('confirmed?', result);
-        console.log('this.selectedUser', this.selectedUser);
-      });
+      .switchMap(result => this.userService.delete(this.selectedUser.id))
+      .subscribe(success => {
+        console.log('user ' + this.selectedUser.email + ' deleted');
+        // TODO: better solution for reloading
+        setTimeout(() => {
+          this.loadUsers();
+        }, 500);
+      },
+      error => console.log('error', error));
   }
 
   selectUser(user: User) {

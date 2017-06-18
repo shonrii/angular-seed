@@ -27,8 +27,8 @@
       <md-checkbox ngModel name="isAdmin">Is Admin?</md-checkbox>
     </div>
   </div>
+  <md-dialog-actions align="end">
+    <button md-button type="button" (click)="dialogRef.close()">Cancel</button>
+    <button md-button color="primary">Save User</button>
+  </md-dialog-actions>
 </form>
-<md-dialog-actions align="end">
-  <button md-button type="button" md-dialog-close>Cancel</button>
-  <button md-button type="submit" color="primary">Save User</button>
-</md-dialog-actions>

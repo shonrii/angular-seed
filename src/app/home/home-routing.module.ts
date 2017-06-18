@@ -5,6 +5,7 @@ import { HomeComponent } from './home.component';
 import { DashboardHomeComponent } from './dashboard/dashboard-home.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { AuthGuard } from '../auth-core/services/auth-guard.service';
+import { UserResolverService } from './resolver/user-resolver.service';
 
 const routes: Routes = [
   {
@@ -18,7 +19,10 @@ const routes: Routes = [
         children: [
           {
             path: ':id',
-            component: UserDetailsComponent
+            component: UserDetailsComponent,
+            resolve: {
+              user: UserResolverService
+            }
           }
         ]
       }
@@ -29,6 +33,7 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
+  providers: [UserResolverService]
 })
 export class HomeRoutingModule { }
 

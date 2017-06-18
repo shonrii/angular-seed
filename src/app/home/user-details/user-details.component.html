@@ -1,4 +1,37 @@
-<p>User ID: {{user?.id}}</p>
-<p>
-  {{user?.firstName}} {{user?.lastName}}
-</p>
+<div *ngIf="user; else elseBlock">
+  <form #form="ngForm" (ngSubmit)="submit(form.value)" ngNativeValidate>
+    <h1>User Details</h1>
+    <div fxLayout="column" fxFlex fxLayoutGap="8px">
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <md-icon svgIcon="avatars:{{user?.avatar}}" class="avatar"></md-icon>
+        <md-select name="avatar" fxFlex placeholder="Avatar" [(ngModel)]="user.avatar">
+          <md-option *ngFor="let avatar of avatars; let i = index;" [value]="avatar">Avatar - {{i + 1}}</md-option>
+        </md-select>
+      </div>
+      <md-input-container>
+        <input mdInput name="email" [(ngModel)]="user.email" placeholder="Email">
+      </md-input-container>
+
+      <md-input-container>
+        <input mdInput type="password" name="password" [(ngModel)]="user.password" placeholder="Password">
+      </md-input-container>
+
+      <md-input-container>
+        <input mdInput name="firstName" [(ngModel)]="user.firstName" placeholder="First Name">
+      </md-input-container>
+
+      <md-input-container>
+        <input mdInput name="lastName" [(ngModel)]="user.lastName" placeholder="Last Name">
+      </md-input-container>
+
+      <div fxLayout="row" fxLayoutGap="24px">
+        <md-checkbox name="isAdmin" [(ngModel)]="user.isAdmin">Is Admin?</md-checkbox>
+      </div>
+
+      <div fxlayout="row" fxLayoutAlign="end center">
+        <button md-raised-button color="primary">Update User</button>
+      </div>
+    </div>
+  </form>
+</div>
+<ng-template #elseBlock>TODO: Add User Form</ng-template>

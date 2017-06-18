@@ -1,29 +1,25 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  MdDialogModule,
-  MdTabsModule
-} from '@angular/material';
+import { MdTabsModule } from '@angular/material';
 import { SharedModule } from '../shared/shared.module';
 import { HomeComponent } from './home.component';
 import { DashboardHomeComponent } from './dashboard/dashboard-home.component';
-import { DialogComponent } from './dialog/dialog.component';
+import { AddUserDialogComponent } from './dialog/add-user-dialog.component';
 import { HomeRoutingModule } from './home-routing.module';
 import { UserDetailsComponent } from './user-details/user-details.component';
 
 @NgModule({
   imports: [
     SharedModule,
-    MdDialogModule,
     MdTabsModule,
     HomeRoutingModule
   ],
   declarations: [
     HomeComponent,
     DashboardHomeComponent,
-    DialogComponent,
+    AddUserDialogComponent,
     UserDetailsComponent
   ],
-  entryComponents: [DialogComponent]
+  entryComponents: [AddUserDialogComponent]
 })
 export class HomeModule { }

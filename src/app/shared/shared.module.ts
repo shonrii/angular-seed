@@ -6,6 +6,7 @@ import {
   MdButtonModule,
   MdCardModule,
   MdCheckboxModule,
+  MdDialogModule,
   MdIconModule,
   MdInputModule,
   MdListModule,
@@ -13,14 +14,18 @@ import {
   MdSelectModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { ConfirmDialogComponent } from './dialog/confirm-dialog.component';
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MdButtonModule,
+    MdDialogModule
   ],
-  declarations: [],
+  declarations: [ConfirmDialogComponent],
+  entryComponents: [ConfirmDialogComponent],
   exports: [
     // angular modules
     CommonModule,
@@ -31,6 +36,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MdButtonModule,
     MdCardModule,
     MdCheckboxModule,
+    MdDialogModule,
     MdIconModule,
     MdInputModule,
     MdListModule,

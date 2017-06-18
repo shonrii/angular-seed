@@ -7,7 +7,7 @@
             <md-icon svgIcon="avatars:{{user.avatar}}" class="avatar"></md-icon>
             <span>{{user.firstName}} {{user.lastName}}</span>
             <span class="filler"></span>
-            <button md-icon-button (click)="openDeleteDialog()">
+            <button md-icon-button (click)="openDeleteDialog(user)">
               <md-icon>close</md-icon>
             </button>
           </md-list-item>
@@ -23,7 +23,7 @@
     <router-outlet></router-outlet>
   </md-card>
 
-  <button md-fab (click)="openAdminDialog()" color="primary" class="fab-bottom-right">
+  <button md-fab (click)="openAddDialog()" color="primary" class="fab-bottom-right">
     <md-icon>add</md-icon>
   </button>
 </div>

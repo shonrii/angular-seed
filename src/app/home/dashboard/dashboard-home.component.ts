@@ -12,7 +12,8 @@ import { go } from '@ngrx/router-store';
 import * as fromRoot from '../../reducers';
 import * as auth from '../../actions/auth';
 
-import { DialogComponent } from '../dialog/dialog.component';
+import { AddUserDialogComponent } from '../dialog/add-user-dialog.component';
+import { ConfirmDialogComponent } from '../../shared/dialog/confirm-dialog.component';
 import { UserService } from '../../http-core/services/user.service';
 import { User } from '../../app-core/models';
 import { AppUtils } from '../../utils/app.utils';
@@ -46,8 +47,9 @@ export class DashboardHomeComponent implements OnInit, OnDestroy {
     this.isAlive = false;
   }
 
-  openAdminDialog() {
-    this.dialog.open(DialogComponent).afterClosed()
+  openAddDialog() {
+    this.dialog.open(AddUserDialogComponent, { width: '500px' })
+      .afterClosed()
       .filter(result => !!result)
       .subscribe(form => {
         AppUtils.trimFields(form);
@@ -64,8 +66,22 @@ export class DashboardHomeComponent implements OnInit, OnDestroy {
       });
   }
 
-  openDeleteDialog() {
-    console.log('openDeleteDialog()');
+  openDeleteDialog(user: User) {
+    this.selectedUser = user;
+    this.dialog.open(
+      ConfirmDialogComponent,
+      {
+        data: {
+          title: 'Delete User',
+          message: 'Delete user, ' + user.firstName + ' ' + user.lastName + '?'
+        }
+      })
+      .afterClosed()
+      .filter(result => !!result)
+      .subscribe(result => {
+        console.log('confirmed?', result);
+        console.log('this.selectedUser', this.selectedUser);
+      });
   }
 
   selectUser(user: User) {
@@ -79,7 +95,9 @@ export class DashboardHomeComponent implements OnInit, OnDestroy {
         console.log('users', users);
         this.users = users;
         if (!ArrayUtils.isEmpty(users) && !this.selectedUser) {
-          this.store.dispatch(go(['/home', this.users[0].id]));
+          const user = this.users[0];
+          this.selectedUser = user;
+          this.store.dispatch(go(['/home', user.id]));
         }
         this.cdr.detectChanges();
       });

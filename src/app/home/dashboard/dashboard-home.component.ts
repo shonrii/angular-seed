@@ -81,6 +81,7 @@ export class DashboardHomeComponent implements OnInit, OnDestroy {
       .switchMap(result => this.userService.delete(this.selectedUser.id))
       .subscribe(success => {
         console.log('user ' + this.selectedUser.email + ' deleted');
+        this.selectUser(this.users[0]);
         // TODO: better solution for reloading
         setTimeout(() => {
           this.loadUsers();

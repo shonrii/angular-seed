@@ -5,8 +5,8 @@ import {
   EventEmitter
 } from '@angular/core';
 import { Store } from '@ngrx/store';
-import * as fromRoot from '../../reducers';
-import * as auth from '../../actions/auth';
+import * as fromRoot from '../../store';
+import * as auth from '../../store/actions/auth';
 
 @Component({
   selector: 'app-main-toolbar',

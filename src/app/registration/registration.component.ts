@@ -12,8 +12,8 @@ import {
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 import { go } from '@ngrx/router-store';
-import * as fromRoot from '../reducers';
-import * as auth from '../actions/auth';
+import * as fromRoot from '../store';
+import * as auth from '../store/actions/auth';
 
 import { AuthService } from '../auth-core/services/auth.service';
 import { User } from '../app-core/models';

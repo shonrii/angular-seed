@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 import { go } from '@ngrx/router-store';
-import * as fromRoot from '../../reducers';
-import * as auth from '../../actions/auth';
+import * as fromRoot from '../../store';
+import * as auth from '../../store/actions/auth';
 
 import { UserService } from '../../http-core/services/user.service';
 import { User } from '../../app-core/models';

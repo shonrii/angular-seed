@@ -37,8 +37,8 @@ import { combineReducers } from '@ngrx/store';
  * the state of the reducer plus any selector functions. The `* as`
  * notation packages up all of the exports into a single object.
  */
-import * as fromAuth from './auth';
-import * as fromLayout from './layout';
+import * as fromAuth from './reducers/auth';
+import * as fromLayout from './reducers/layout';
 
 
 /**

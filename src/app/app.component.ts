@@ -6,8 +6,8 @@ import './operators';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 
-import * as fromRoot from './reducers';
-import * as layout from './actions/layout';
+import * as fromRoot from './store';
+import * as layout from './store/actions/layout';
 
 import { AuthService } from './auth-core/services/auth.service';
 

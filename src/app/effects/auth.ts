@@ -6,7 +6,7 @@ import { AuthService } from '../auth-core/services/auth.service';
 import { UserService } from '../http-core/services/user.service';
 import { User } from '../app-core/models';
 
-import * as auth from '../actions/auth';
+import * as auth from '../store/actions/auth';
 
 /**
  * Effects offer a way to isolate and easily test side-effects within your

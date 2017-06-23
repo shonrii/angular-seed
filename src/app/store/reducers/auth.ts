@@ -1,5 +1,5 @@
 import * as auth from '../actions/auth';
-import { User } from '../app-core/models';
+import { User } from '../../app-core/models';
 
 export interface State {
   authenticated: boolean;
@@ -68,17 +68,18 @@ export function reducer(state = initialState, action: auth.Actions): State {
         user: user
       });
 
-    case auth.ActionTypes.SIGN_OUT_ERROR:
-      return Object.assign({}, state, {
-        authenticated: true,
-        error: action.payload.error.message,
-        user: undefined
-      });
-
+    case auth.ActionTypes.SIGN_OUT:
     case auth.ActionTypes.SIGN_OUT_SUCCESS:
       return Object.assign({}, state, {
         authenticated: false,
         error: undefined,
+        user: undefined
+      });
+
+    case auth.ActionTypes.SIGN_OUT_ERROR:
+      return Object.assign({}, state, {
+        authenticated: true,
+        error: action.payload.error.message,
         user: undefined
       });
 

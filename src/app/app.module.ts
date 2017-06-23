@@ -14,7 +14,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { RouterStoreModule } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AuthEffects } from './effects/auth';
-import { reducer } from './reducers';
+import { reducer } from './store';
 
 import { AppCoreModule } from './app-core/app-core.module';
 import { AuthCoreModule } from './auth-core/auth-core.module';

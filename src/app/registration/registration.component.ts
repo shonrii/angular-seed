@@ -13,7 +13,7 @@ import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 import { go } from '@ngrx/router-store';
 import * as fromRoot from '../store';
-import * as auth from '../store/actions/auth';
+import * as authActions from '../store/actions/auth.actions';
 
 import { AuthService } from '../auth-core/services/auth.service';
 import { User } from '../app-core/models';
@@ -68,7 +68,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
       user: user
     };
 
-    this.store.dispatch(new auth.RegisterAction(payload));
+    this.store.dispatch(new authActions.RegisterAction(payload));
   }
 
   goBack() {

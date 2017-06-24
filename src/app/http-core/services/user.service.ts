@@ -35,9 +35,10 @@ export class UserService {
       .catch(this.handleError);
   }
 
+  // not working currently
   update(user: User): Observable<User> {
     const options = ApiUtils.generateOptions('PUT');
-    return this.http.put(`${this.usersUrl}/${user.id}`, JSON.stringify(user), options)
+    return this.http.put(`${this.usersUrl}`, JSON.stringify(user), options)
       .map(this.extractData)
       .catch(this.handleError);
   }

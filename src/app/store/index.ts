@@ -37,8 +37,9 @@ import { combineReducers } from '@ngrx/store';
  * the state of the reducer plus any selector functions. The `* as`
  * notation packages up all of the exports into a single object.
  */
-import * as fromAuth from './reducers/auth';
-import * as fromLayout from './reducers/layout';
+import * as authReducer from './reducers/auth.reducer';
+import * as layoutReducer from './reducers/layout.reducer';
+import * as userAdminReducer from './reducers/user-admin.reducer';
 
 
 /**
@@ -46,9 +47,10 @@ import * as fromLayout from './reducers/layout';
  * our top level state interface is just a map of keys to inner state types.
  */
 export interface State {
-  auth: fromAuth.State;
-  layout: fromLayout.State;
   router: fromRouter.RouterState;
+  auth: authReducer.State;
+  layout: layoutReducer.State;
+  userAdmin: userAdminReducer.State;
 }
 
 /**
@@ -59,9 +61,10 @@ export interface State {
  * the result from right to left.
  */
 const reducers = {
-  auth: fromAuth.reducer,
-  layout: fromLayout.reducer,
   router: fromRouter.routerReducer,
+  auth: authReducer.reducer,
+  layout: layoutReducer.reducer,
+  userAdmin: userAdminReducer.reducer
 };
 
 const developmentReducer: ActionReducer<State> = compose(storeFreeze, combineReducers)(reducers);
@@ -80,17 +83,27 @@ export function reducer(state: any, action: any) {
  */
 export const getAuthState = (state: State) => state.auth;
 
-export const isAuthenticated = createSelector(getAuthState, fromAuth.isAuthenticated);
-export const isAuthenticatedLoaded = createSelector(getAuthState, fromAuth.isAuthenticatedLoaded);
-export const getAuthenticatedUser = createSelector(getAuthState, fromAuth.getAuthenticatedUser);
-export const getAuthenticationError = createSelector(getAuthState, fromAuth.getAuthenticationError);
-export const isAuthenticationLoading = createSelector(getAuthState, fromAuth.isLoading);
-export const getSignOutError = createSelector(getAuthState, fromAuth.getSignOutError);
-export const getRegistrationError = createSelector(getAuthState, fromAuth.getRegistrationError);
+export const isAuthenticated = createSelector(getAuthState, authReducer.isAuthenticated);
+export const isAuthenticatedLoaded = createSelector(getAuthState, authReducer.isAuthenticatedLoaded);
+export const getAuthenticatedUser = createSelector(getAuthState, authReducer.getAuthenticatedUser);
+export const getAuthenticationError = createSelector(getAuthState, authReducer.getAuthenticationError);
+export const isAuthenticationLoading = createSelector(getAuthState, authReducer.isLoading);
+export const getSignOutError = createSelector(getAuthState, authReducer.getSignOutError);
+export const getRegistrationError = createSelector(getAuthState, authReducer.getRegistrationError);
 
 /**
  * Layout Reducers
  */
 export const getLayoutState = (state: State) => state.layout;
 
-export const getShowSidenav = createSelector(getLayoutState, fromLayout.getShowSidenav);
+export const getShowSidenav = createSelector(getLayoutState, layoutReducer.getShowSidenav);
+
+/**
+ * User Admin Reducers
+ */
+export const getUserAdminState = (state: State) => state.userAdmin;
+
+export const getSelectedUser = createSelector(getUserAdminState, userAdminReducer.getSelectedUser);
+export const getUserList = createSelector(getUserAdminState, userAdminReducer.getUserList);
+export const isUserLoading = createSelector(getUserAdminState, userAdminReducer.isLoading);
+export const isUserLoaded = createSelector(getUserAdminState, userAdminReducer.isLoaded);

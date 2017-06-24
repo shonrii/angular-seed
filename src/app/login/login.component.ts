@@ -17,7 +17,7 @@ import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 import { go } from '@ngrx/router-store';
 import * as fromRoot from '../store';
-import * as auth from '../store/actions/auth';
+import * as authActions from '../store/actions/auth.actions';
 
 import { AuthService } from '../auth-core/services/auth.service';
 
@@ -68,6 +68,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   submit(form: any) {
-    this.store.dispatch(new auth.AuthenticateAction(form));
+    this.store.dispatch(new authActions.AuthenticateAction(form));
   }
 }

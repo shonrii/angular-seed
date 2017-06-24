@@ -1,23 +1,19 @@
 import {
   Component,
-  ChangeDetectorRef,
   ChangeDetectionStrategy,
-  OnInit,
-  OnDestroy
+  OnInit
 } from '@angular/core';
 import { MdDialog } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 import { go } from '@ngrx/router-store';
 import * as fromRoot from '../../store';
-import * as auth from '../../store/actions/auth';
+import * as userAdminActions from '../../store/actions/user-admin.actions';
 
 import { AddUserDialogComponent } from '../dialog/add-user-dialog.component';
 import { ConfirmDialogComponent } from '../../shared/dialog/confirm-dialog.component';
-import { UserService } from '../../http-core/services/user.service';
 import { User } from '../../app-core/models';
 import { AppUtils } from '../../utils/app.utils';
-import { ArrayUtils } from '../../utils/array.utils';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -26,25 +22,19 @@ import { ArrayUtils } from '../../utils/array.utils';
   styleUrls: ['./dashboard-home.component.scss']
 })
 
-export class DashboardHomeComponent implements OnInit, OnDestroy {
+export class DashboardHomeComponent implements OnInit {
 
-  users: User[];
-  isAlive = true;
-  private selectedUser: User;
+  users$: Observable<User[]>;
 
   constructor(
-    private cdr: ChangeDetectorRef,
     private dialog: MdDialog,
-    private userService: UserService,
     private store: Store<fromRoot.State>
-  ) { }
-
-  ngOnInit() {
-    this.loadUsers();
+  ) {
+    this.users$ = this.store.select(fromRoot.getUserList);
   }
 
-  ngOnDestroy() {
-    this.isAlive = false;
+  ngOnInit() {
+    this.store.dispatch(new userAdminActions.LoadUsersAction);
   }
 
   openAddDialog() {
@@ -54,20 +44,16 @@ export class DashboardHomeComponent implements OnInit, OnDestroy {
       .subscribe(form => {
         AppUtils.trimFields(form);
         const user: User = new User(form);
-        const payload = {
-          user: user
-        };
+        const payload = { user: user };
+        this.store.dispatch(new userAdminActions.CreateUserAction(payload));
 
-        this.store.dispatch(new auth.RegisterAction(payload));
-        // TODO: better solution for reloading
         setTimeout(() => {
-          this.loadUsers();
+          this.store.dispatch(new userAdminActions.LoadUsersAction);
         }, 500);
       });
   }
 
   openDeleteDialog(user: User) {
-    this.selectedUser = user;
     this.dialog.open(
       ConfirmDialogComponent,
       {
@@ -78,35 +64,25 @@ export class DashboardHomeComponent implements OnInit, OnDestroy {
       })
       .afterClosed()
       .filter(result => !!result)
-      .switchMap(result => this.userService.delete(this.selectedUser.id))
       .subscribe(success => {
-        console.log('user ' + this.selectedUser.email + ' deleted');
-        this.selectUser(this.users[0]);
-        // TODO: better solution for reloading
+        const payload = { id: user.id };
+        this.store.dispatch(new userAdminActions.DeleteUserAction(payload));
+
         setTimeout(() => {
-          this.loadUsers();
+          this.selectUser(null);
+          this.store.dispatch(new userAdminActions.LoadUsersAction);
         }, 500);
       },
       error => console.log('error', error));
   }
 
   selectUser(user: User) {
-    this.selectedUser = user;
-    this.store.dispatch(go(['/home', this.selectedUser.id]));
-  }
-
-  loadUsers() {
-    this.userService.getUsers()
-      .subscribe(users => {
-        console.log('users', users);
-        this.users = users;
-        if (!ArrayUtils.isEmpty(users) && !this.selectedUser) {
-          const user = this.users[0];
-          this.selectedUser = user;
-          this.store.dispatch(go(['/home', user.id]));
-        }
-        this.cdr.detectChanges();
-      });
+    if (!!user) {
+      this.store.dispatch(new userAdminActions.LoadUserAction({ id: user.id }));
+      this.store.dispatch(go(['/home', user.id]));
+    } else {
+      this.store.dispatch(go(['/home']));
+    }
   }
 
 }

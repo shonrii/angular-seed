@@ -5,7 +5,7 @@ import { HomeComponent } from './home.component';
 import { DashboardHomeComponent } from './dashboard/dashboard-home.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { AuthGuard } from '../auth-core/services/auth-guard.service';
-import { UserResolverService } from './resolver/user-resolver.service';
+import { UserAdminGuard } from './guards/user-admin.guard';
 
 const routes: Routes = [
   {
@@ -20,9 +20,10 @@ const routes: Routes = [
           {
             path: ':id',
             component: UserDetailsComponent,
-            resolve: {
-              user: UserResolverService
-            }
+            // resolve: {
+            //   user: UserResolverService
+            // }
+            canActivateChild: [UserAdminGuard]
           }
         ]
       }
@@ -33,7 +34,7 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: [UserResolverService]
+  providers: [UserAdminGuard]
 })
 export class HomeRoutingModule { }
 

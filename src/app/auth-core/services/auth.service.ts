@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 import { go } from '@ngrx/router-store';
 import * as fromRoot from '../../store';
-import * as auth from '../../store/actions/auth';
+import * as authActions from '../../store/actions/auth.actions';
 
 import { UserService } from '../../http-core/services/user.service';
 import { User } from '../../app-core/models';
@@ -27,7 +27,7 @@ export class AuthService {
   ) {
     const cookie = localStorage.getItem('seed-app-logged-in') || null;
     if (cookie) {
-      this.store.dispatch(new auth.AuthenticatedAction({ token: cookie }));
+      this.store.dispatch(new authActions.AuthenticatedAction({ token: cookie }));
     }
   }
 

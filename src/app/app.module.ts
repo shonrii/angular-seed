@@ -13,7 +13,8 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { RouterStoreModule } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { AuthEffects } from './effects/auth';
+import { AuthEffects } from './effects/auth.effects';
+import { UserAdminEffects } from './effects/user-admin.effects';
 import { reducer } from './store';
 
 import { AppCoreModule } from './app-core/app-core.module';
@@ -38,7 +39,12 @@ import { PageNotFoundComponent } from './not-found.component';
     MdMenuModule,
     MdToolbarModule,
     MdSidenavModule,
+    /**
+     * root/child effects separation coming in upcoming Ngrx version
+     * just load all effects here for now
+     */
     EffectsModule.run(AuthEffects),
+    EffectsModule.run(UserAdminEffects),
     /**
      * StoreModule.provideStore is imported once in the root module, accepting a reducer
      * function or object map of reducer functions. If passed an object of

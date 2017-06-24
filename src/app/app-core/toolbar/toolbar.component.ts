@@ -6,7 +6,7 @@ import {
 } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as fromRoot from '../../store';
-import * as auth from '../../store/actions/auth';
+import * as authActions from '../../store/actions/auth.actions';
 
 @Component({
   selector: 'app-main-toolbar',
@@ -20,6 +20,6 @@ export class AppToolbarComponent {
   constructor(private store: Store<fromRoot.State>) { }
 
   signOut() {
-    this.store.dispatch(new auth.SignOutAction());
+    this.store.dispatch(new authActions.SignOutAction());
   }
 }

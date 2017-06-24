@@ -3,7 +3,7 @@
     <md-tab-group>
       <md-tab label="Users">
         <md-nav-list>
-          <md-list-item *ngFor="let user of users" (click)="selectUser(user)">
+          <md-list-item *ngFor="let user of users$ | async" (click)="selectUser(user)">
             <md-icon svgIcon="avatars:{{user.avatar}}" class="avatar"></md-icon>
             <span>{{user.firstName}} {{user.lastName}}</span>
             <span class="filler"></span>

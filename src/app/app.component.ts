@@ -7,7 +7,7 @@ import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 
 import * as fromRoot from './store';
-import * as layout from './store/actions/layout';
+import * as layoutActions from './store/actions/layout.actions';
 
 import { AuthService } from './auth-core/services/auth.service';
 
@@ -48,11 +48,11 @@ export class AppComponent {
   }
 
   closeSidenav() {
-    this.store.dispatch(new layout.CloseSidenavAction());
+    this.store.dispatch(new layoutActions.CloseSidenavAction());
   }
 
   openSidenav() {
-    this.store.dispatch(new layout.OpenSidenavAction());
+    this.store.dispatch(new layoutActions.OpenSidenavAction());
   }
 
 }

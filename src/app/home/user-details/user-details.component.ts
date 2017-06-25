@@ -22,6 +22,7 @@ import { AppUtils } from '../../utils/app.utils';
 export class UserDetailsComponent implements OnInit {
 
   avatars = new Array(16).fill(0).map((_, i) => `svg-${i + 1}`);
+  loading$: Observable<boolean>;
   user$: Observable<User>
 
   constructor(
@@ -33,6 +34,7 @@ export class UserDetailsComponent implements OnInit {
   ngOnInit() {
     // this.user$ = this.route.data
     //   .map((data: { user: User }) => data.user);
+    this.loading$ = this.store.select(fromRoot.isUserLoading);
     this.user$ = this.store.select(fromRoot.getSelectedUser);
   }
 

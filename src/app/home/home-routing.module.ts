@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { HomeComponent } from './home.component';
-import { DashboardHomeComponent } from './dashboard/dashboard-home.component';
-import { UserDetailsComponent } from './user-details/user-details.component';
+import { DashboardHomeComponent } from './containers/dashboard/dashboard-home.component';
+import { UserDetailsComponent } from './components/user-details/user-details.component';
 import { AuthGuard } from '../auth-core/services/auth-guard.service';
 import { UserAdminGuard } from './guards/user-admin.guard';
 

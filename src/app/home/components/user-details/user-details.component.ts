@@ -6,12 +6,12 @@ import {
 // import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import * as fromRoot from '../../store';
-import * as userAdminActions from '../../store/actions/user-admin.actions';
+import * as fromRoot from '../../../store';
+import * as userAdminActions from '../../../store/actions/user-admin.actions';
 
-import { UserService } from '../../http-core/services/user.service';
-import { User } from '../../app-core/models';
-import { AppUtils } from '../../utils/app.utils';
+import { UserService } from '../../../http-core/services/user.service';
+import { User } from '../../../app-core/models';
+import { AppUtils } from '../../../utils/app.utils';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

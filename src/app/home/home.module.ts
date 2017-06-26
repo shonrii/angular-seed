@@ -2,11 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MdTabsModule } from '@angular/material';
 import { SharedModule } from '../shared/shared.module';
-import { HomeComponent } from './home.component';
-import { DashboardHomeComponent } from './dashboard/dashboard-home.component';
-import { AddUserDialogComponent } from './dialog/add-user-dialog.component';
 import { HomeRoutingModule } from './home-routing.module';
-import { UserDetailsComponent } from './user-details/user-details.component';
+import { HomeComponent } from './home.component';
+import { DashboardHomeComponent } from './containers/dashboard/dashboard-home.component';
+import { AddUserDialogComponent } from './components/dialog/add-user-dialog.component';
+import { UserDetailsComponent } from './components/user-details/user-details.component';
+
 
 @NgModule({
   imports: [

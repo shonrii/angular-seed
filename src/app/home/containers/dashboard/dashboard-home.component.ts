@@ -7,13 +7,13 @@ import { MdDialog } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 import { go } from '@ngrx/router-store';
-import * as fromRoot from '../../store';
-import * as userAdminActions from '../../store/actions/user-admin.actions';
+import * as fromRoot from '../../../store';
+import * as userAdminActions from '../../../store/actions/user-admin.actions';
 
-import { AddUserDialogComponent } from '../dialog/add-user-dialog.component';
-import { ConfirmDialogComponent } from '../../shared/dialog/confirm-dialog.component';
-import { User } from '../../app-core/models';
-import { AppUtils } from '../../utils/app.utils';
+import { AddUserDialogComponent } from '../../components/dialog/add-user-dialog.component';
+import { ConfirmDialogComponent } from '../../../shared/dialog/confirm-dialog.component';
+import { User } from '../../../app-core/models';
+import { AppUtils } from '../../../utils/app.utils';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

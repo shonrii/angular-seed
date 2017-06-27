@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Effect, Actions, toPayload } from '@ngrx/effects';
-import { Action } from '@ngrx/store';
+import { Action, Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { AuthService } from '../auth-core/services/auth.service';
 import { UserService } from '../http-core/services/user.service';
 import { User } from '../app-core/models';
 
+
+import * as fromRoot from '../store';
 import * as authActions from '../store/actions/auth.actions';
+import * as layoutActions from '../store/actions/layout.actions';
 
 /**
  * Effects offer a way to isolate and easily test side-effects within your
@@ -67,6 +70,7 @@ export class AuthEffects {
     .map(toPayload)
     .switchMap(payload => {
       console.log('signing out...');
+      this.store.dispatch(new layoutActions.CloseSidenavAction);
       return this.authService.signOut()
         .map(value => new authActions.SignOutSuccessAction())
         .catch(error => Observable.of(new authActions.SignOutErrorAction({ error: error })));
@@ -75,6 +79,7 @@ export class AuthEffects {
   constructor(
     private actions: Actions,
     private authService: AuthService,
+    private store: Store<fromRoot.State>,
     private userService: UserService
   ) { }
 }

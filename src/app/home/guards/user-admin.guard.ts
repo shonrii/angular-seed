@@ -59,7 +59,6 @@ export class UserAdminGuard implements CanActivate, Resolve<User> {
   }
 
   hasUserInDb(id: number) {
-    console.log('hasUserInDb?');
     return Observable
       .of(new userAdminActions.LoadUserAction({ id: id }))
       .do(action => this.store.dispatch(action))

@@ -16,9 +16,6 @@ const initialState: State = {
 
 export function reducer(state = initialState, action: userAdminActions.Actions): State {
   switch (action.type) {
-    case userAdminActions.ActionTypes.CREATE_USER:
-    case userAdminActions.ActionTypes.UPDATE_USER:
-    case userAdminActions.ActionTypes.DELETE_USER:
     case userAdminActions.ActionTypes.LOAD_USER:
     case userAdminActions.ActionTypes.LOAD_USERS:
       return Object.assign({}, state, {
@@ -28,7 +25,6 @@ export function reducer(state = initialState, action: userAdminActions.Actions):
       });
 
     case userAdminActions.ActionTypes.CREATE_USER_SUCCESS:
-    case userAdminActions.ActionTypes.UPDATE_USER_SUCCESS:
     case userAdminActions.ActionTypes.DELETE_USER_SUCCESS:
       return Object.assign({}, state, {
         error: undefined,
@@ -36,6 +32,7 @@ export function reducer(state = initialState, action: userAdminActions.Actions):
         loaded: true
       });
 
+    case userAdminActions.ActionTypes.UPDATE_USER_SUCCESS:
     case userAdminActions.ActionTypes.LOAD_USER_SUCCESS:
       return Object.assign({}, state, {
         error: undefined,
@@ -62,6 +59,9 @@ export function reducer(state = initialState, action: userAdminActions.Actions):
         loading: false
       });
 
+    case userAdminActions.ActionTypes.CREATE_USER:
+    case userAdminActions.ActionTypes.UPDATE_USER:
+    case userAdminActions.ActionTypes.DELETE_USER:
     default:
       return state;
   }

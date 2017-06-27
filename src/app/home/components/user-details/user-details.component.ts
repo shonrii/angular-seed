@@ -38,20 +38,12 @@ export class UserDetailsComponent implements OnInit {
     this.user$ = this.store.select(fromRoot.getSelectedUser);
   }
 
-  submit() {
-    // alternatively could dispatch action to update user
-    this.user$
-      .do(user => {
-        AppUtils.trimFields(user);
-        this.userService.update(user);
-      })
-      .subscribe(updatedUser => {
-        console.log('updated user', updatedUser);
-        setTimeout(() => {
-          this.store.dispatch(new userAdminActions.LoadUsersAction);
-        }, 500);
-      },
-      error => console.log(error));
+  submit(updatedUser: User) {
+    AppUtils.trimFields(updatedUser);
+    this.store.dispatch(new userAdminActions.UpdateUserAction({ user: updatedUser }));
+    setTimeout(() => {
+      this.store.dispatch(new userAdminActions.LoadUsersAction);
+    }, 500);
   }
 
 }

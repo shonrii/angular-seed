@@ -35,11 +35,12 @@ export class UserService {
       .catch(this.handleError);
   }
 
-  // not working currently
   update(user: User): Observable<User> {
+    // angular in-memory-web-api returns null body for updates
     const options = ApiUtils.generateOptions('PUT');
-    return this.http.put(`${this.usersUrl}`, JSON.stringify(user), options)
-      .map(this.extractData)
+    return this.http.put(`${this.usersUrl}/${user.id}`, JSON.stringify(user), options)
+      // .map(this.extractData)
+      .map(res => user)
       .catch(this.handleError);
   }
 

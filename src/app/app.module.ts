@@ -12,7 +12,7 @@ import 'hammerjs';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { RouterStoreModule } from '@ngrx/router-store';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+// import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AuthEffects } from './effects/auth.effects';
 import { UserAdminEffects } from './effects/user-admin.effects';
 import { reducer } from './store';
@@ -68,7 +68,7 @@ import { PageNotFoundComponent } from './not-found.component';
      *
      * See: https://github.com/zalmoxisus/redux-devtools-extension
      */
-    StoreDevtoolsModule.instrumentOnlyWithExtension(),
+    // StoreDevtoolsModule.instrumentOnlyWithExtension(),
     SharedModule,
     AppCoreModule,
     AuthCoreModule,

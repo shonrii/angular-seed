@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { MdIconRegistry } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 import './operators';
@@ -10,6 +10,7 @@ import * as fromRoot from './store';
 import * as layoutActions from './store/actions/layout.actions';
 
 import { AuthService } from './auth-core/services/auth.service';
+import { SideMenuOptionsService } from './app-core/services/side-menu-options.service';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -17,29 +18,16 @@ import { AuthService } from './auth-core/services/auth.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
   showSidenav$: Observable<boolean>;
-  // TODO: subscribe to router state and use some service to determine sidenav view links available
-  views: any[] = [
-    {
-      name: 'link1',
-      icon: 'business'
-    },
-    {
-      name: 'link2',
-      icon: 'local_convenience_store'
-    },
-    {
-      name: 'link3',
-      icon: 'group_add'
-    },
-  ];
+  views: any[] = [];
 
   constructor(
     public authService: AuthService,
     iconRegistry: MdIconRegistry,
     sanitizer: DomSanitizer,
+    private sms: SideMenuOptionsService,
     private store: Store<fromRoot.State>
   ) {
     this.showSidenav$ = this.store.select(fromRoot.getShowSidenav);
@@ -47,12 +35,13 @@ export class AppComponent {
     iconRegistry.addSvgIconSetInNamespace('avatars', avatarsSafeUrl);
   }
 
-  closeSidenav() {
-    this.store.dispatch(new layoutActions.CloseSidenavAction());
-  }
-
-  openSidenav() {
-    this.store.dispatch(new layoutActions.OpenSidenavAction());
+  ngOnInit() {
+    this.store.select(fromRoot.getRouterPath)
+      .subscribe(path => {
+        // console.log('router path', path);
+        this.views = [];
+        this.views = this.sms.getMenuOptions(path);
+      });
   }
 
 }

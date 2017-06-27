@@ -13,6 +13,7 @@ import {
   MdToolbarModule
 } from '@angular/material';
 
+import { SideMenuOptionsService } from './services/side-menu-options.service';
 import { AppToolbarComponent } from './toolbar/toolbar.component';
 
 @NgModule({
@@ -24,7 +25,8 @@ import { AppToolbarComponent } from './toolbar/toolbar.component';
     MdToolbarModule
   ],
   declarations: [AppToolbarComponent],
-  exports: [AppToolbarComponent]
+  exports: [AppToolbarComponent],
+  providers: [SideMenuOptionsService]
 })
 export class AppCoreModule {
   constructor( @Optional() @SkipSelf() parentModule: AppCoreModule) {

@@ -79,6 +79,13 @@ export function reducer(state: any, action: any) {
 }
 
 /**
+ * Router Reducers
+ */
+export const getRouterState = (state: State) => state.router;
+
+export const getRouterPath = createSelector(getRouterState, (state: fromRouter.RouterState) => state.path);
+
+/**
  * Auth Reducers
  */
 export const getAuthState = (state: State) => state.auth;

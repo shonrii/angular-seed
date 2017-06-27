@@ -9,13 +9,6 @@ import * as authActions from '../../store/actions/auth.actions';
 import { UserService } from '../../http-core/services/user.service';
 import { User } from '../../app-core/models';
 
-/*export const MOCK_USER = new User();
-MOCK_USER.id = '1';
-MOCK_USER.email = 'foo@test.com';
-MOCK_USER.firstName = 'Foo';
-MOCK_USER.lastName = 'Bar';
-MOCK_USER.password = 'password';*/
-
 @Injectable()
 export class AuthService {
 

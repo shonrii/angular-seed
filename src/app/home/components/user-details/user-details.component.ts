@@ -1,6 +1,7 @@
 import {
   Component,
   OnInit,
+  OnDestroy,
   ChangeDetectionStrategy
 } from '@angular/core';
 // import { ActivatedRoute } from '@angular/router';
@@ -19,23 +20,33 @@ import { AppUtils } from '../../../utils/app.utils';
   templateUrl: './user-details.component.html',
   styleUrls: ['./user-details.component.scss']
 })
-export class UserDetailsComponent implements OnInit {
+export class UserDetailsComponent implements OnInit, OnDestroy {
 
   avatars = new Array(16).fill(0).map((_, i) => `svg-${i + 1}`);
+  avatarSub: any;
+  selectedAvatar: string;
   loading$: Observable<boolean>;
-  user$: Observable<User>
+  user$: Observable<User>;
 
   constructor(
     // private route: ActivatedRoute,
     private store: Store<fromRoot.State>,
     private userService: UserService
-  ) { }
+  ) {
+    this.loading$ = this.store.select(fromRoot.isUserLoading);
+    this.user$ = this.store.select(fromRoot.getSelectedUser);
+  }
 
   ngOnInit() {
     // this.user$ = this.route.data
     //   .map((data: { user: User }) => data.user);
-    this.loading$ = this.store.select(fromRoot.isUserLoading);
-    this.user$ = this.store.select(fromRoot.getSelectedUser);
+    this.avatarSub = this.user$
+      .filter(user => !!user)
+      .subscribe(user => this.selectedAvatar = user.avatar);
+  }
+
+  ngOnDestroy() {
+    this.avatarSub.unsubscribe();
   }
 
   submit(updatedUser: User) {

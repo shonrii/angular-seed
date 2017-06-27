@@ -41,9 +41,6 @@ export class UserDetailsComponent implements OnInit {
   submit(updatedUser: User) {
     AppUtils.trimFields(updatedUser);
     this.store.dispatch(new userAdminActions.UpdateUserAction({ user: updatedUser }));
-    setTimeout(() => {
-      this.store.dispatch(new userAdminActions.LoadUsersAction);
-    }, 500);
   }
 
 }

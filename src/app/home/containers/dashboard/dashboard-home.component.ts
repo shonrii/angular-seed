@@ -46,11 +46,8 @@ export class DashboardHomeComponent implements OnInit {
         const user: User = new User(form);
         const payload = { user: user };
         this.store.dispatch(new userAdminActions.CreateUserAction(payload));
-
-        setTimeout(() => {
-          this.store.dispatch(new userAdminActions.LoadUsersAction);
-        }, 500);
-      });
+      },
+      error => console.log('error', error));
   }
 
   openDeleteDialog(user: User) {
@@ -67,11 +64,7 @@ export class DashboardHomeComponent implements OnInit {
       .subscribe(success => {
         const payload = { id: user.id };
         this.store.dispatch(new userAdminActions.DeleteUserAction(payload));
-
-        setTimeout(() => {
-          this.selectUser(null);
-          this.store.dispatch(new userAdminActions.LoadUsersAction);
-        }, 500);
+        this.selectUser(null);
       },
       error => console.log('error', error));
   }

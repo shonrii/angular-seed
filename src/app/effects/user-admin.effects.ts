@@ -53,7 +53,11 @@ export class UserAdminEffects {
 
   @Effect()
   public loadUsers: Observable<Action> = this.actions
-    .ofType(userActions.ActionTypes.LOAD_USERS)
+    .ofType(
+      userActions.ActionTypes.LOAD_USERS,
+      userActions.ActionTypes.CREATE_USER_SUCCESS,
+      userActions.ActionTypes.DELETE_USER_SUCCESS,
+      userActions.ActionTypes.UPDATE_USER_SUCCESS)
     .debounceTime(500)
     .switchMap(payload => {
       return this.userService.getUsers()

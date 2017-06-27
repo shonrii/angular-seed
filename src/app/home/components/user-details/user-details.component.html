@@ -4,7 +4,7 @@
 <ng-template #userDetails>
   <div *ngIf="user$ | async as user; else addUser">
     <form #form="ngForm" (ngSubmit)="submit(form.value)" ngNativeValidate>
-      <h1>User Details {{user?.id}}</h1>
+      <h1>User Details</h1>
       <input type="hidden" name="id" [(ngModel)]="user.id">
       <div fxLayout="column" fxFlex fxLayoutGap="8px">
         <div fxLayout="row" fxLayoutAlign="start center">

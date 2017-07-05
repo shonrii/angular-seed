@@ -9,6 +9,8 @@ import * as authActions from '../../store/actions/auth.actions';
 import { UserService } from '../../http-core/services/user.service';
 import { User } from '../../app-core/models';
 
+export const TOKEN_NAME = 'myToken';
+
 @Injectable()
 export class AuthService {
 

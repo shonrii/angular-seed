@@ -5,8 +5,8 @@ import {
 } from '@angular/http';
 
 export class ApiUtils {
-  static generateOptions(requestType: string, token?: string, searchParams?: URLSearchParams): RequestOptions {
-    const headers = token ? new Headers({ 'Authorization': token }) : new Headers();
+  static generateOptions(requestType: string, searchParams?: URLSearchParams): RequestOptions {
+    const headers = new Headers();
     if (requestType === 'PUT' || requestType === 'POST') {
       headers.append('Content-Type', 'application/json');
     }

@@ -9,28 +9,28 @@ import { Observable } from 'rxjs/Observable';
 import { ApiUtils } from '../../utils/api.utils';
 import { User } from '../../app-core/models';
 
+const USERS_URL = 'api/users';
+
 @Injectable()
 export class UserService {
-
-  private usersUrl = 'api/users';
 
   constructor(private http: Http) { }
 
   findUser(id: number): Observable<User> {
-    return this.http.get(`${this.usersUrl}/${id}`)
+    return this.http.get(`${USERS_URL}/${id}`)
       .map(this.extractData)
       .catch(this.handleError);
   }
 
   getUsers(): Observable<User[]> {
-    return this.http.get(this.usersUrl)
+    return this.http.get(USERS_URL)
       .map(this.extractData)
       .catch(this.handleError);
   }
 
   create(user: User): Observable<User> {
     const options = ApiUtils.generateOptions('POST');
-    return this.http.post(this.usersUrl, JSON.stringify(user), options)
+    return this.http.post(USERS_URL, JSON.stringify(user), options)
       .map(this.extractData)
       .catch(this.handleError);
   }
@@ -38,7 +38,7 @@ export class UserService {
   update(user: User): Observable<User> {
     // angular in-memory-web-api returns null body for updates
     const options = ApiUtils.generateOptions('PUT');
-    return this.http.put(`${this.usersUrl}/${user.id}`, JSON.stringify(user), options)
+    return this.http.put(`${USERS_URL}/${user.id}`, JSON.stringify(user), options)
       // .map(this.extractData)
       .map(res => user)
       .catch(this.handleError);
@@ -49,7 +49,7 @@ export class UserService {
      * note: you can delete the current user
      * backend should implement a guard
      */
-    return this.http.delete(`${this.usersUrl}/${id}`)
+    return this.http.delete(`${USERS_URL}/${id}`)
       .map(res => Observable.of({}))
       .catch(this.handleError);
   }

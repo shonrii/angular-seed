@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
+import { RequestOptions } from '@angular/http';
 import {
   MdMenuModule,
   MdSidenavModule,
@@ -19,6 +20,8 @@ import { reducer } from './store';
 
 import { AppCoreModule } from './app-core/app-core.module';
 import { AuthCoreModule } from './auth-core/auth-core.module';
+import { AuthRequestOptions } from './auth-core/auth-request-options';
+import { AuthErrorHandler } from './auth-core/services/auth-error-handler';
 import { HttpCoreModule } from './http-core/http-core.module';
 import { SharedModule } from './shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
@@ -77,7 +80,10 @@ import { PageNotFoundComponent } from './not-found.component';
     RegistrationModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    { provide: RequestOptions, useClass: AuthRequestOptions },
+    { provide: ErrorHandler, useClass: AuthErrorHandler }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
